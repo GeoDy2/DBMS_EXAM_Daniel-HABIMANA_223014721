@@ -1,0 +1,362 @@
+
+mysql> use final_exam_BIT2132;
+Database changed
+mysql> craete table Client_master(ClientNo int, Name varchar(255), Address varchar(255), City varchar(255), State varchar(30), bal_due int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'craete table Client_master(ClientNo int, Name varchar(255), Address varchar(255)' at line 1
+mysql> create table Client_master(ClientNo int, Name varchar(255), Address varchar(255), City varchar(255), State varchar(30), bal_due int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> Insert into client_master values('C123','Allan','Nyagatare','East','Rwanda','1000');
+Query OK, 1 row affected, 1 warning (0.03 sec)
+
+mysql> Insert into client_master values('C124','Anitha','Rwamagana','East','Rwanda','2000');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> Insert into client_master values('C125','Eric','Rusizi','West','Rwanda','3500');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> Insert into client_master values('C126','Daniel','Kicukiro','Kigali','Rwanda','4000');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> Insert into client_master values('C127','Cynthia','Gasabo','Kigali','Rwanda','5000');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> Insert into client_master values('C128','Gustave','Kicukiro','Kigali','Rwanda','6000');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> select *from client_master where bal_due > 5000;
++----------+---------+----------+--------+--------+---------+
+| ClientNo | Name    | Address  | City   | State  | bal_due |
++----------+---------+----------+--------+--------+---------+
+|        0 | Gustave | Kicukiro | Kigali | Rwanda |    6000 |
++----------+---------+----------+--------+--------+---------+
+1 row in set (0.02 sec)
+
+mysql> update table client_master set bal_due = '5100' where clientno = 'c123';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table client_master set bal_due = '5100' where clientno = 'c123'' at line 1
+mysql> alter table client_master set bal_due = '5100' where clientno = 'c123';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'set bal_due = '5100' where clientno = 'c123'' at line 1
+mysql> update client_master set bal_due = '5100' where clientno = 'c123';
+Query OK, 6 rows affected, 1 warning (0.02 sec)
+Rows matched: 6  Changed: 6  Warnings: 1
+
+mysql> alter table client_master rename Client12;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select *from client12;
++----------+---------+-----------+--------+--------+---------+
+| ClientNo | Name    | Address   | City   | State  | bal_due |
++----------+---------+-----------+--------+--------+---------+
+|        0 | Allan   | Nyagatare | East   | Rwanda |    5100 |
+|        0 | Anitha  | Rwamagana | East   | Rwanda |    5100 |
+|        0 | Eric    | Rusizi    | West   | Rwanda |    5100 |
+|        0 | Daniel  | Kicukiro  | Kigali | Rwanda |    5100 |
+|        0 | Cynthia | Gasabo    | Kigali | Rwanda |    5100 |
+|        0 | Gustave | Kicukiro  | Kigali | Rwanda |    5100 |
++----------+---------+-----------+--------+--------+---------+
+6 rows in set (0.00 sec)
+
+mysql> create table EMPLOYEES(Emp_ID int primary key not null, Emp_Names varchar(255), salary int default 3000, Department Varchar(255),Adress varchar(255));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into employees values('1','Daniel','Software','Kigali');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into employees values('1','Daniel','3000','Software','Kigali');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into employees values('2','Patrick','6000','Development','Rubavu');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values('3','Allan','9000','Business','Nyagatare');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values('4','Gustave','12000','ICT','Kicukiro');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values('5','Anitha','15000','Finance','Gasabo');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select *from employees;
++--------+-----------+--------+-------------+-----------+
+| Emp_ID | Emp_Names | salary | Department  | Adress    |
++--------+-----------+--------+-------------+-----------+
+|      1 | Daniel    |   3000 | Software    | Kigali    |
+|      2 | Patrick   |   6000 | Development | Rubavu    |
+|      3 | Allan     |   9000 | Business    | Nyagatare |
+|      4 | Gustave   |  12000 | ICT         | Kicukiro  |
+|      5 | Anitha    |  15000 | Finance     | Gasabo    |
++--------+-----------+--------+-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> create table Departments(Dep_Id int Primary key not null auto_increment, DepName varchar(255),Emp_ID int foreign key(Emp_ID) references employees(Emp_ID),Company varchar(255);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key(Emp_ID) references employees(Emp_ID),Company varchar(255)' at line 1
+mysql> create table Departments(Dep_Id int Primary key not null auto_increment, DepName varchar(255),Emp_Id int,company varchar(255),Date date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table Departments(Dep_Id int Primary key not null auto_increment, DepName varchar(255),Emp_Id int,company varchar(255),Date date);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> alter table departments add foreign key(Emp_id) references employees(emp_id);
+
+mysql> insert into departments values('011','software','','AMACO','20-10-2010');
+Query OK, 1 row affected, 2 warnings (0.00 sec)
+
+mysql> insert into departments values('012','Development','','AMACO','20-9-2011');
+Query OK, 1 row affected, 2 warnings (0.00 sec)
+
+mysql> insert into departments values('013','Business','','AMACO','12-07-2010');
+Query OK, 1 row affected, 2 warnings (0.00 sec)
+
+mysql> insert into departments values('014','ICT','','AMACO','12-07-2012');
+Query OK, 1 row affected, 2 warnings (0.00 sec)
+
+mysql> insert into departments values('015','Finance','','AMACO','12-09-2013');
+Query OK, 1 row affected, 2 warnings (0.00 sec)
+mysql> desc employees;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| Emp_ID     | int          | NO   | PRI | NULL    |       |
+| Emp_Names  | varchar(255) | YES  |     | NULL    |       |
+| salary     | int          | YES  |     | 3000    |       |
+| Department | varchar(255) | YES  |     | NULL    |       |
+| Adress     | varchar(255) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.04 sec)
+mysql> select Emp_names, DepName from employees left join departments on employees.emp_id = departments.emp_id;
++-----------+---------+
+| Emp_names | DepName |
++-----------+---------+
+| Daniel    | NULL    |
+| Patrick   | NULL    |
+| Allan     | NULL    |
+| Gustave   | NULL    |
+| Anitha    | NULL    |
++-----------+---------+
+5 rows in set (0.02 sec)
+mysql> select employees.Emp_names, departments.DepName from employees right join departments on employees. = departments.emp_id;
++-----------+-------------+
+| Emp_names | DepName     |
++-----------+-------------+
+| NULL      | software    |
+| NULL      | Development |
+| NULL      | Business    |
+| NULL      | ICT         |
+| NULL      | Finance     |
++-----------+-------------+
+mysql> select emp_id, emp_names from employees where salary > 9000;
++--------+-----------+
+| emp_id | emp_names |
++--------+-----------+
+|      4 | Gustave   |
+|      5 | Anitha    |
++--------+-----------+
+2 rows in set (0.00 sec)
+mysql> ------Question 7
+    -> ^C
+mysql> Create table Student(StudentId varchar(5), FullNames varchar(25), gender varchar(6), age varchar(2), department varchar(30));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into student values('2008','Danny habibi','m','22','BIT');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('2009','Gloria Mute','f','18','Finance');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('2010','Patty Niyo','m','23','Engineering');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('2011','Monique Uwa','f','20','Business');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('2012','Nadine Umu','f','19','Lawyer');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('2013','Allan Ruda','m','25','Journalism');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select *from student; --------list of students
++-----------+--------------+--------+------+-------------+
+| StudentId | FullNames    | gender | age  | department  |
++-----------+--------------+--------+------+-------------+
+| 2008      | Danny habibi | m      | 22   | BIT         |
+| 2009      | Gloria Mute  | f      | 18   | Finance     |
+| 2010      | Patty Niyo   | m      | 23   | Engineering |
+| 2011      | Monique Uwa  | f      | 20   | Business    |
+| 2012      | Nadine Umu   | f      | 19   | Lawyer      |
+| 2013      | Allan Ruda   | m      | 25   | Journalism  |
++-----------+--------------+--------+------+-------------+
+6 rows in set (0.00 sec)
+mysql> select studentId, fullnames,age,department from student where gender = 'f';
++-----------+-------------+------+------------+
+| studentId | fullnames   | age  | department |
++-----------+-------------+------+------------+
+| 2009      | Gloria Mute | 18   | Finance    |
+| 2011      | Monique Uwa | 20   | Business   |
+| 2012      | Nadine Umu  | 19   | Lawyer     |
++-----------+-------------+------+------------+
+
+mysql> select studentid,fullnames,age,department from student where gender = 'm';
++-----------+--------------+------+-------------+
+| studentid | fullnames    | age  | department  |
++-----------+--------------+------+-------------+
+| 2008      | Danny habibi | 22   | BIT         |
+| 2010      | Patty Niyo   | 23   | Engineering |
+| 2013      | Allan Ruda   | 25   | Journalism  |
++-----------+--------------+------+-------------+
+3 rows in set (0.00 sec)
+mysql> ------Question 7 sub(4) done above i.e inserting values;
+mysql> delete from student where age < 20;
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> select *from student;
++-----------+--------------+--------+------+-------------+
+| StudentId | FullNames    | gender | age  | department  |
++-----------+--------------+--------+------+-------------+
+| 2008      | Danny habibi | m      | 22   | BIT         |
+| 2010      | Patty Niyo   | m      | 23   | Engineering |
+| 2011      | Monique Uwa  | f      | 20   | Business    |
+| 2013      | Allan Ruda   | m      | 25   | Journalism  |
++-----------+--------------+--------+------+-------------+
+4 rows in set (0.00 sec)
+mysql> create table EMPLOYEE(Employee_Id int,First_Name varchar(200),Last_Name varchar(200),Email varchar(255),Phone_number int,Hire_Date date,Job_Id varchar(255),Salary varchar (255),Commission_pct varchar(255),Manager_Id int,department_id varchar(255));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into employee values('1','Daniel','Habimana','danielhabimana0@gmail.web','782067959','02-01-2027','111','5000k','100k','100','123');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into employee values('2','Allan','Rudasingwa','allanrudasingwa0@gmail.web','782067459','02-01-2026','111','4000k','150k','110','124');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> insert into employee values('3','Patrick','Niyorurema','pattyniyorurema0@gmail.web','782067959','02-01-2027','111','2000k','100k','100','123');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> insert into employee values('4','Monique','Uwase','moniqueuwase0@gmail.web','780000000','10-07-2020','112','2000k','130k','120','70');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> insert into employee values('5','Yves','Mugisha','yvesmugisha0@gmail.web','781010101','10-07-2020','112','4800k','130k','110','60');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> insert into employee values('5','Joel','Austin','austin0@gmail.web','781012345','10-07-2020','112','4200k','130k','100','80');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> insert into employee values('6','Derick','Austin','austderick0@gmail.web','781012345','10-07-2020','112','1000k','130k','130','70');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> select *from employee;
++-------------+------------+------------+----------------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+| Employee_Id | First_Name | Last_Name  | Email                      | Phone_number | Hire_Date  | Job_Id | Salary | Commission_pct | Manager_Id | department_id |
++-------------+------------+------------+----------------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+|           1 | Daniel     | Habimana   | danielhabimana0@gmail.web  |    782067959 | 0000-00-00 | 111    | 5000k  | 100k           |        100 | 123           |
+|           2 | Allan      | Rudasingwa | allanrudasingwa0@gmail.web |    782067459 | 0000-00-00 | 111    | 4000k  | 150k           |        110 | 124           |
+|           3 | Patrick    | Niyorurema | pattyniyorurema0@gmail.web |    782067959 | 0000-00-00 | 111    | 2000k  | 100k           |        100 | 123           |
+|           4 | Monique    | Uwase      | moniqueuwase0@gmail.web    |    780000000 | 0000-00-00 | 112    | 2000k  | 130k           |        120 | 70            |
+|           5 | Yves       | Mugisha    | yvesmugisha0@gmail.web     |    781010101 | 0000-00-00 | 112    | 4800k  | 130k           |        110 | 60            |
+|           5 | Joel       | Austin     | austin0@gmail.web          |    781012345 | 0000-00-00 | 112    | 4200k  | 130k           |        100 | 80            |
+|           6 | Derick     | Austin     | austderick0@gmail.web      |    781012345 | 0000-00-00 | 112    | 1000k  | 130k           |        130 | 70            |
++-------------+------------+------------+----------------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+7 rows in set (0.00 sec)
+
+mysql> select employee_id,first_name,last_name,email from employee where manager_id = '100';
++-------------+------------+------------+----------------------------+
+| employee_id | first_name | last_name  | email                      |
++-------------+------------+------------+----------------------------+
+|           1 | Daniel     | Habimana   | danielhabimana0@gmail.web  |
+|           3 | Patrick    | Niyorurema | pattyniyorurema0@gmail.web |
+|           5 | Joel       | Austin     | austin0@gmail.web          |
++-------------+------------+------------+----------------------------+
+mysql> select first_name,last_name from employee where salary >= 4800;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Daniel     | Habimana  |
+| Yves       | Mugisha   |
+mysql> select employee_id, first_name,last_name from employee where last_name = 'Austin';
++-------------+------------+-----------+
+| employee_id | first_name | last_name |
++-------------+------------+-----------+
+|           5 | Joel       | Austin    |
+|           6 | Derick     | Austin    |
++-------------+------------+-----------+
+mysql> select first_name,last_name from employee where department_id = '60';
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Yves       | Mugisha   |
++------------+-----------+
+
+mysql> select first_name,last_name from employee where department_id = '70';
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Monique    | Uwase     |
+| Derick     | Austin    |
++------------+-----------+
+
+mysql> select first_name,last_name from employee where department_id = '80';
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Joel       | Austin    |
++------------+-----------+
+mysql> create table sales(SalesNo int, Salesname varchar(255),Branch varchar(255),Salesamount int,DOB date);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into sales values('1','Danny','Nyanza','200','21-Dec-03');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> insert into sales values('2','Morgan','Nyagatare','1000','30-Dec-04');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> insert into sales values('3','Aubin','Gasabo','800','06-Nov-10');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> insert into sales values('4','Teta','Kicukiro','800','02-Jun-15');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> insert into sales values('5','Roxy','Nyarugenge','1500','19-Mar-03');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> select *from sales;
++---------+-----------+------------+-------------+------------+
+| SalesNo | Salesname | Branch     | Salesamount | DOB        |
++---------+-----------+------------+-------------+------------+
+|       1 | Danny     | Nyanza     |         200 | 0000-00-00 |
+|       2 | Morgan    | Nyagatare  |        1000 | 0000-00-00 |
+|       3 | Aubin     | Gasabo     |         800 | 0000-00-00 |
+|       4 | Teta      | Kicukiro   |         800 | 0000-00-00 |
+|       5 | Roxy      | Nyarugenge |        1500 | 0000-00-00 |
++---------+-----------+------------+-------------+------------+
+mysql> select sum(salesamount) from sales;
++------------------+
+| sum(salesamount) |
++------------------+
+|             4300 |
++------------------+
+1 row in set (0.01 sec)
+
+mysql> select avg(salesamount) from sales;
++------------------+
+| avg(salesamount) |
++------------------+
+|         860.0000 |
++------------------+
+1 row in set (0.00 sec)
+mysql> select salesname, DOB from sales where month(DOB) = 'Dec';
++-----------+------------+
+| salesname | DOB        |
++-----------+------------+
+| Danny     | 0000-00-00 |
+| Morgan    | 0000-00-00 |
+| Aubin     | 0000-00-00 |
+| Teta      | 0000-00-00 |
+| Roxy      | 0000-00-00 |
++-----------+------------+
+5 rows in set, 1 warning (0.01 sec)
+
+mysql> select salesname, DOB from sales where month(DOB) = '21-Dec-03';
+Empty set, 1 warning (0.00 sec)
+
+
+mysql> select salesname,dob from sales where dob='30-12-04';
+Empty set (0.00 sec)
+
